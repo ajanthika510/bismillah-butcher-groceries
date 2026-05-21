@@ -10,9 +10,11 @@ exports.createProduct = async (req, res) => {
       name,
       description,
       category,
+      portion,
       price,
       stock,
-      image
+      image, 
+      isOffer
     } = req.body;
 
     const product = await prisma.product.create({
@@ -25,11 +27,15 @@ exports.createProduct = async (req, res) => {
 
         category,
 
+        portion,
+
         price: parseFloat(price),
 
         stock: parseInt(stock),
 
-        image
+        image,
+
+        isOffer
       }
     });
 
@@ -112,9 +118,11 @@ exports.updateProduct = async (req, res) => {
       name,
       description,
       category,
+      portion,
       price,
       stock,
-      image
+      image,
+      isOffer
     } = req.body;
 
     const updatedProduct =
@@ -132,11 +140,15 @@ exports.updateProduct = async (req, res) => {
 
           category,
 
+          portion,
+
           price: parseFloat(price),
 
           stock: parseInt(stock),
 
-          image
+          image,
+
+          isOffer
         }
       });
 

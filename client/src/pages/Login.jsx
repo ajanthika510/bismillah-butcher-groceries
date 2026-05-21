@@ -6,6 +6,12 @@ import API from "../services/api";
 
 import { AuthContext } from "../context/AuthContext";
 
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp
+} from "react-icons/fa";
+
 function Login() {
 
   const navigate = useNavigate();
@@ -168,6 +174,263 @@ function Login() {
         </p>
 
       </form>
+
+      {/* =========================
+         FOOTER
+      ========================= */}
+      
+      <footer
+        className="
+          bg-black
+          text-white
+          pt-14
+          pb-8
+          mt-20
+        "
+      >
+      
+        <div
+          className="
+            max-w-7xl
+            mx-auto
+            px-4
+            sm:px-6
+          "
+        >
+      
+          {/* TOP SECTION */}
+      
+          <div
+            className="
+              flex
+              flex-col
+              lg:flex-row
+              justify-between
+              gap-10
+              border-b
+              border-zinc-800
+              pb-10
+            "
+          >
+      
+            {/* LEFT */}
+      
+            <div className="max-w-xl">
+      
+              <h2
+                className="
+                  text-2xl
+                  sm:text-3xl
+                  font-black
+                "
+              >
+                Bismillah
+                <span className="text-green-400">
+                  {" "}Butcher & Grocery
+                </span>
+              </h2>
+      
+              <p
+                className="
+                  mt-5
+                  text-gray-400
+                  leading-relaxed
+                  text-sm
+                  sm:text-base
+                "
+              >
+                Premium halal meat, fresh vegetables,
+                groceries and frozen foods delivered
+                with quality, freshness and trust.
+              </p>
+      
+            </div>
+      
+      
+            {/* SOCIALS */}
+      
+            <div>
+      
+              <h3
+                className="
+                  text-lg
+                  font-bold
+                  mb-5
+                "
+              >
+                Follow Us
+              </h3>
+      
+              <div
+                className="
+                  flex
+                  flex-wrap
+                  gap-4
+                "
+              >
+      
+                {/* FACEBOOK */}
+      
+                <a
+                  href="https://facebook.com/bismillahbutchers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-blue-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaFacebookF />
+                </a>
+      
+      
+                {/* INSTAGRAM */}
+      
+                <a
+                  href="https://instagram.com/bismillahbutchers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-pink-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaInstagram />
+                </a>
+      
+      
+                {/* WHATSAPP */}
+      
+                <a
+                  href="https://wa.me/447404943400"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-green-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaWhatsapp />
+                </a>
+      
+              </div>
+      
+            </div>
+      
+          </div>
+      
+      
+          {/* BOTTOM SECTION */}
+      
+          <div
+            className="
+              mt-8
+              flex
+              flex-col
+              md:flex-row
+              items-center
+              justify-between
+              gap-5
+              text-sm
+              text-gray-400
+              text-center
+            "
+          >
+      
+            {/* LEFT */}
+      
+            <p>
+              © 2026 Halal Butcher & Grocery.
+              All Rights Reserved.
+            </p>
+      
+      
+            {/* CENTER */}
+      
+            <div
+              className="
+                flex
+                flex-wrap
+                justify-center
+                gap-4
+              "
+            >
+      
+              <button
+                className="
+                  hover:text-green-400
+                  transition
+                "
+              >
+                Privacy Policy
+              </button>
+      
+              <button
+                className="
+                  hover:text-green-400
+                  transition
+                "
+              >
+                Cookies
+              </button>
+      
+            </div>
+      
+      
+            {/* RIGHT */}
+      
+            <p>
+        Powered by{" "}
+      
+        <a
+          href="https://www.neirahtech.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            text-green-400
+            font-semibold
+            hover:text-green-300
+            transition
+            duration-300
+          "
+        >
+          Neirahtech
+        </a>
+      
+      </p>
+      
+          </div>
+      
+        </div>
+      
+      </footer>
 
     </div>
   );

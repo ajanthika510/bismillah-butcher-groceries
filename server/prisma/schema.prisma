@@ -24,8 +24,10 @@ model Product {
   description String?
   category    String
   price       Float
+  portion     String?
   stock       Int
   image       String?
+  isOffer     Boolean  @default(false)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]

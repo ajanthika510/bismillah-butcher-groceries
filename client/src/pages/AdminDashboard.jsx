@@ -21,13 +21,16 @@ function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    category: "",
-    price: "",
-    stock: "",
-    image: ""
-  });
+
+  name: "",
+  description: "",
+  category: "",
+  portion: "",
+  price: "",
+  stock: "",
+  image: "",
+  isOffer: false
+});
 
   useEffect(() => {
     fetchProducts();
@@ -121,22 +124,23 @@ function AdminDashboard() {
 
   const handleEdit = (product) => {
 
-    setFormData({
-      name: product.name,
-      description: product.description,
-      category: product.category,
-      price: product.price,
-      stock: product.stock,
-      image: product.image
-    });
+  setFormData({
+    name: product.name,
+    description: product.description,
+    category: product.category,
+    price: product.price,
+    stock: product.stock,
+    image: product.image,
+    isOffer: product.isOffer
+  });
 
-    setEditId(product.id);
+  setEditId(product.id);
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  };
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
 
   const filteredProducts = products.filter((product) =>
 
@@ -473,6 +477,21 @@ function AdminDashboard() {
             />
 
             <input
+  type="text"
+  name="portion"
+  placeholder="Portion (Example: 5KG)"
+  value={formData.portion}
+  onChange={handleChange}
+  className="
+    w-full
+    border
+    rounded-xl
+    px-4
+    py-3
+  "
+/>
+
+            <input
               type="number"
               name="price"
               placeholder="Price"
@@ -529,6 +548,27 @@ function AdminDashboard() {
               mt-6
             "
           />
+
+          <div className="flex items-center gap-3 mt-6">
+
+  <input
+    type="checkbox"
+    name="isOffer"
+    checked={formData.isOffer}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        isOffer: e.target.checked
+      })
+    }
+    className="w-5 h-5"
+  />
+
+  <label className="font-semibold">
+    Add to Offers
+  </label>
+
+</div>
 
           {/* IMAGE PREVIEW */}
 

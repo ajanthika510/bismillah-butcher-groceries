@@ -1,5 +1,9 @@
 const express = require("express");
 
+const pool = require("../config/db");
+
+const prisma = require("../prisma/prismaClient");
+
 const router = express.Router();
 
 const {
@@ -22,8 +26,29 @@ const {
 // PUBLIC ROUTES
 router.get("/", getProducts);
 
-router.get("/:id", getSingleProduct);
+router.get("/offers", async (req, res) => {
 
+  try {
+
+    const offers = await prisma.product.findMany({
+      where: {
+        isOffer: true
+      }
+    });
+
+    res.json(offers);
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message: "Failed to fetch offers"
+    });
+  }
+});
+
+router.get("/:id", getSingleProduct);
 
 // ADMIN ROUTES
 router.post(

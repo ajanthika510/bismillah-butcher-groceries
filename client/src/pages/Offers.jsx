@@ -1,68 +1,37 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCart } from "../context/CartContext";
+import { useEffect, useState } from "react";
+import API from "../services/api";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp
+} from "react-icons/fa";
 
 function Offers() {
 
   const { addToCart } = useCart();
 
-  const offers = [
+  const [offers, setOffers] = useState([]);
 
-    {
-      id: 1,
-      name: "Chicken Niblets",
-      weight: "3KG",
-      price: 10,
-      image:
-        "https://images.unsplash.com/photo-1604503468506-a8da13d82791?q=80&w=1200&auto=format&fit=crop"
-    },
+  useEffect(() => {
+    fetchOffers();
+  }, []);
 
-    {
-      id: 2,
-      name: "Chicken Thigh",
-      weight: "3KG",
-      price: 15,
-      image:
-        "https://images.unsplash.com/photo-1587593810167-a84920ea0781?q=80&w=1200&auto=format&fit=crop"
-    },
+  const fetchOffers = async () => {
 
-    {
-      id: 3,
-      name: "Chicken Boneless",
-      weight: "5KG",
-      price: 30,
-      image:
-        "https://images.unsplash.com/photo-1603048297172-c92544798d5a?q=80&w=1200&auto=format&fit=crop"
-    },
+    try {
 
-    {
-      id: 4,
-      name: "Chicken Leg",
-      weight: "1 BOX",
-      price: 28,
-      image:
-        "https://images.unsplash.com/photo-1529692236671-f1de50a1c95d?q=80&w=1200&auto=format&fit=crop"
-    },
+      const res = await API.get("/products/offers");
 
-    {
-      id: 5,
-      name: "Beef With Bone",
-      weight: "5KG",
-      price: 50,
-      image:
-        "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=1200&auto=format&fit=crop"
-    },
+      setOffers(res.data);
 
-    {
-      id: 6,
-      name: "Beef Boneless",
-      weight: "5KG",
-      price: 55,
-      image:
-        "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop"
+    } catch (error) {
+
+      console.log(error);
     }
-
-  ];
+  };
 
   return (
 
@@ -81,11 +50,15 @@ function Offers() {
       <section
         className="
           relative
-          py-24 md:py-32
+          py-20
+          sm:py-24
+          md:py-32
           overflow-hidden
           bg-black
         "
       >
+
+        {/* BACKGROUND */}
 
         <div
           className="
@@ -97,6 +70,8 @@ function Offers() {
             to-black
           "
         />
+
+        {/* GLOW */}
 
         <motion.div
 
@@ -115,8 +90,10 @@ function Offers() {
             left-1/2
             -translate-x-1/2
             -translate-y-1/2
-            w-[300px]
-            h-[300px]
+            w-[280px]
+            h-[280px]
+            sm:w-[450px]
+            sm:h-[450px]
             md:w-[700px]
             md:h-[700px]
             bg-red-500/20
@@ -131,7 +108,8 @@ function Offers() {
             z-10
             max-w-6xl
             mx-auto
-            px-6
+            px-4
+            sm:px-6
             text-center
           "
         >
@@ -153,16 +131,20 @@ function Offers() {
             }}
 
             className="
-              text-4xl sm:text-5xl md:text-7xl
+              text-3xl
+              sm:text-5xl
+              md:text-7xl
               font-black
               text-white
               leading-tight
             "
           >
             🔥 Weekly
+
             <span className="text-yellow-400">
               {" "} Special Offers
             </span>
+
           </motion.h1>
 
           <motion.p
@@ -183,7 +165,10 @@ function Offers() {
             }}
 
             className="
-              mt-6 text-base sm:text-lg md:text-xl
+              mt-6
+              text-sm
+              sm:text-lg
+              md:text-xl
               text-gray-300
               max-w-3xl
               mx-auto
@@ -201,290 +186,538 @@ function Offers() {
 
       {/* OFFER GRID */}
 
-      <section className="py-16 md:py-24">
+      <section className="py-14 sm:py-16 md:py-24">
 
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-          <div
-            className="
-              grid
-              grid-cols-1
-              sm:grid-cols-2
-              lg:grid-cols-3
-              gap-6 md:gap-10
-            "
-          >
+          {offers.length === 0 ? (
 
-            {offers.map((offer, index) => (
+            <div className="text-center py-20">
 
-              <motion.div
-
-                key={offer.id}
-
-                initial={{
-                  opacity: 0,
-                  y: 40
-                }}
-
-                whileInView={{
-                  opacity: 1,
-                  y: 0
-                }}
-
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1
-                }}
-
-                viewport={{
-                  once: true
-                }}
-
-                whileHover={{
-                  y: -12
-                }}
-
+              <h2
                 className="
-                  bg-white
-                  rounded-[32px]
-                  overflow-hidden
-                  shadow-[0_15px_50px_rgba(0,0,0,0.08)]
-                  border
-                  border-zinc-200
+                  text-2xl
+                  sm:text-3xl
+                  font-black
+                  text-gray-700
                 "
               >
+                No Offers Available
+              </h2>
 
-                {/* IMAGE */}
+              <p
+                className="
+                  mt-4
+                  text-sm
+                  sm:text-base
+                  text-gray-500
+                "
+              >
+                Admin has not added any offers yet.
+              </p>
 
-                <div className="relative overflow-hidden">
+            </div>
 
-                  <img
-                    src={offer.image}
-                    alt={offer.name}
-                    className="
-                      w-full
-                      h-56 sm:h-64 md:h-72
-                      object-cover
-                      hover:scale-110
-                      transition
-                      duration-700
-                    "
-                  />
+          ) : (
 
-                  {/* OFFER BADGE */}
+            <div
+              className="
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-3
+                gap-6
+                md:gap-10
+              "
+            >
 
-                  <div
-                    className="
-                      absolute
-                      top-5
-                      right-5
-                      bg-red-500
-                      text-white
-                      px-5
-                      py-2
-                      rounded-full
-                      font-bold
-                      shadow-2xl
-                    "
-                  >
-                    OFFER
+              {offers.map((offer, index) => (
+
+                <motion.div
+
+                  key={offer.id}
+
+                  initial={{
+                    opacity: 0,
+                    y: 40
+                  }}
+
+                  whileInView={{
+                    opacity: 1,
+                    y: 0
+                  }}
+
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1
+                  }}
+
+                  viewport={{
+                    once: true
+                  }}
+
+                  whileHover={{
+                    y: -12
+                  }}
+
+                  className="
+                    bg-white
+                    rounded-[30px]
+                    overflow-hidden
+                    shadow-[0_15px_50px_rgba(0,0,0,0.08)]
+                    border
+                    border-zinc-200
+                    group
+                  "
+                >
+
+                  {/* IMAGE */}
+
+                  <div className="relative overflow-hidden">
+
+                    <img
+                      src={offer.image}
+                      alt={offer.name}
+                      className="
+                        w-full
+                        h-56
+                        sm:h-64
+                        md:h-72
+                        object-cover
+                        group-hover:scale-110
+                        transition
+                        duration-700
+                      "
+                    />
+
+                    {/* OFFER BADGE */}
+
+                    <div
+                      className="
+                        absolute
+                        top-4
+                        right-4
+                        bg-red-500
+                        text-white
+                        px-3
+                        sm:px-5
+                        py-1.5
+                        sm:py-2
+                        rounded-full
+                        font-bold
+                        text-xs
+                        sm:text-sm
+                        shadow-2xl
+                      "
+                    >
+                      OFFER
+                    </div>
+
                   </div>
 
-                </div>
+                  {/* CONTENT */}
 
-                {/* CONTENT */}
+                  <div className="p-5 md:p-8">
 
-                <div className="p-5 md:p-8">
+                    {/* TITLE */}
 
-                  <h3
-                    className="
-                      text-2xl md:text-3xl
-                      font-black
-                      text-black
-                    "
-                  >
-                    {offer.name}
-                  </h3>
+                    <h3
+                      className="
+                        text-xl
+                        sm:text-2xl
+                        md:text-3xl
+                        font-black
+                        text-black
+                        leading-tight
+                      "
+                    >
+                      {offer.name}
+                    </h3>
 
-                  <p
-                    className="
-                      mt-3
-                      text-lg
-                      text-gray-500
-                    "
-                  >
-                    {offer.weight}
-                  </p>
-
-                  <div
-                    className="
-                      mt-6
-                      flex
-                      items-center
-                      justify-between
-                    "
-                  >
+                    {/* CATEGORY */}
 
                     <p
                       className="
-                        text-3xl md:text-5xl
-                        font-black
-                        text-red-500
+                        mt-3
+                        text-sm
+                        sm:text-lg
+                        text-gray-500
                       "
                     >
-                      £{offer.price}
+                      {offer.category}
                     </p>
 
-                  </div>
 
-                  {/* BUTTONS */}
+                    {/* PRICE + PORTION */}
 
-                  <div className="mt-8 space-y-4">
-
-                    <button
-
-                      onClick={() => addToCart(offer)}
-
+                    <div
                       className="
-                        w-full
-                        bg-green-700
-                        hover:bg-green-600
-                        transition
-                        duration-300
-                        py-3 md:py-4
-                        rounded-2xl
-                        text-white
-                        font-semibold
-                        tracking-wide
-                        shadow-lg
+                        mt-6
+                        flex
+                        items-center
+                        justify-between
                       "
                     >
-                      Add To Cart
-                    </button>
 
-                    <Link to="/products">
+                      <div>
+
+                        {offer.portion && (
+
+                          <p
+                            className="
+                              text-xs
+                              sm:text-sm
+                              font-semibold
+                              text-gray-500
+                            "
+                          >
+                            Portion: {offer.portion}
+                          </p>
+
+                        )}
+
+                        <p
+                          className="
+                            mt-2
+                            text-2xl
+                            sm:text-3xl
+                            md:text-5xl
+                            font-black
+                            text-red-500
+                          "
+                        >
+                          £{offer.price}
+                        </p>
+
+                      </div>
+
+                    </div>
+
+
+                    {/* BUTTONS */}
+
+                    <div className="mt-8 space-y-4">
 
                       <button
+
+                        onClick={() => addToCart(offer)}
+
                         className="
                           w-full
-                          bg-black
-                          hover:bg-zinc-800
+                          bg-green-700
+                          hover:bg-green-600
                           transition
                           duration-300
-                          py-4
+                          py-3
+                          sm:py-4
                           rounded-2xl
                           text-white
                           font-semibold
                           tracking-wide
+                          shadow-lg
+                          text-sm
+                          sm:text-base
                         "
                       >
-                        View Products
+                        Add To Cart
                       </button>
 
-                    </Link>
+                      <Link to="/products">
+
+                        <button
+                          className="
+                            w-full
+                            bg-black
+                            hover:bg-zinc-800
+                            transition
+                            duration-300
+                            py-3
+                            sm:py-4
+                            rounded-2xl
+                            text-white
+                            font-semibold
+                            tracking-wide
+                            text-sm
+                            sm:text-base
+                          "
+                        >
+                          View Products
+                        </button>
+
+                      </Link>
+
+                    </div>
 
                   </div>
 
-                </div>
+                </motion.div>
 
-              </motion.div>
+              ))}
 
-            ))}
+            </div>
 
-          </div>
+          )}
 
         </div>
 
       </section>
 
-
-      {/* BOTTOM CTA */}
-
-      <section
+      {/* =========================
+         FOOTER
+      ========================= */}
+      
+      <footer
         className="
-          relative
-          py-20 md:py-28
-          overflow-hidden
+          bg-black
+          text-white
+          pt-14
+          pb-8
+          mt-20
         "
       >
-
+      
         <div
           className="
-            absolute
-            inset-0
-            bg-gradient-to-r
-            from-black
-            via-green-950
-            to-black
-          "
-        />
-
-        <div
-          className="
-            relative
-            z-10
-            max-w-5xl
+            max-w-7xl
             mx-auto
-            px-6
-            text-center
-            text-white
+            px-4
+            sm:px-6
           "
         >
-
-          <h2
+      
+          {/* TOP SECTION */}
+      
+          <div
             className="
-              text-3xl sm:text-4xl md:text-6xl
-              font-black
-              leading-tight
+              flex
+              flex-col
+              lg:flex-row
+              justify-between
+              gap-10
+              border-b
+              border-zinc-800
+              pb-10
             "
           >
-            Visit Our Store
-            <br />
-
-            <span className="text-green-400">
-              Fresh Halal Quality
-            </span>
-
-          </h2>
-
-          <p
+      
+            {/* LEFT */}
+      
+            <div className="max-w-xl">
+      
+              <h2
+                className="
+                  text-2xl
+                  sm:text-3xl
+                  font-black
+                "
+              >
+                Bismillah
+                <span className="text-green-400">
+                  {" "}Butcher & Grocery
+                </span>
+              </h2>
+      
+              <p
+                className="
+                  mt-5
+                  text-gray-400
+                  leading-relaxed
+                  text-sm
+                  sm:text-base
+                "
+              >
+                Premium halal meat, fresh vegetables,
+                groceries and frozen foods delivered
+                with quality, freshness and trust.
+              </p>
+      
+            </div>
+      
+      
+            {/* SOCIALS */}
+      
+            <div>
+      
+              <h3
+                className="
+                  text-lg
+                  font-bold
+                  mb-5
+                "
+              >
+                Follow Us
+              </h3>
+      
+              <div
+                className="
+                  flex
+                  flex-wrap
+                  gap-4
+                "
+              >
+      
+                {/* FACEBOOK */}
+      
+                <a
+                  href="https://facebook.com/bismillahbutchers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-blue-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaFacebookF />
+                </a>
+      
+      
+                {/* INSTAGRAM */}
+      
+                <a
+                  href="https://instagram.com/bismillahbutchers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-pink-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaInstagram />
+                </a>
+      
+      
+                {/* WHATSAPP */}
+      
+                <a
+                  href="https://wa.me/447404943400"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-green-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaWhatsapp />
+                </a>
+      
+              </div>
+      
+            </div>
+      
+          </div>
+      
+      
+          {/* BOTTOM SECTION */}
+      
+          <div
             className="
-              mt-6 text-base sm:text-lg md:text-xl
-              text-gray-300
-              max-w-3xl
-              mx-auto
+              mt-8
+              flex
+              flex-col
+              md:flex-row
+              items-center
+              justify-between
+              gap-5
+              text-sm
+              text-gray-400
+              text-center
             "
           >
-            Premium halal meat and grocery
-            selections available every day.
-          </p>
-
-          <Link to="/products">
-
-            <button
+      
+            {/* LEFT */}
+      
+            <p>
+              © 2026 Halal Butcher & Grocery.
+              All Rights Reserved.
+            </p>
+      
+      
+            {/* CENTER */}
+      
+            <div
               className="
-                mt-10
-                bg-green-500
-                hover:bg-green-400
-                transition
-                duration-300
-                px-8 md:px-12 py-4 md:py-5
-                rounded-2xl
-                text-white
-                font-semibold
-                tracking-wide
-                shadow-[0_0_40px_rgba(34,197,94,0.5)]
-                text-lg
+                flex
+                flex-wrap
+                justify-center
+                gap-4
               "
             >
-              Explore Products
-            </button>
-
-          </Link>
-
+      
+              <button
+                className="
+                  hover:text-green-400
+                  transition
+                "
+              >
+                Privacy Policy
+              </button>
+      
+              <button
+                className="
+                  hover:text-green-400
+                  transition
+                "
+              >
+                Cookies
+              </button>
+      
+            </div>
+      
+      
+            {/* RIGHT */}
+      
+            <p>
+        Powered by{" "}
+      
+        <a
+          href="https://www.neirahtech.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            text-green-400
+            font-semibold
+            hover:text-green-300
+            transition
+            duration-300
+          "
+        >
+          Neirahtech
+        </a>
+      
+      </p>
+      
+          </div>
+      
         </div>
-
-      </section>
+      
+      </footer>
 
     </div>
 

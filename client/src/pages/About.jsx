@@ -5,7 +5,10 @@ import {
   FaShieldAlt,
   FaTruck,
   FaUsers,
-  FaCheckCircle
+  FaCheckCircle,
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp
 } from "react-icons/fa";
 
 import aboutImage from "../assets/meat.png";
@@ -30,7 +33,8 @@ function About() {
       <section
         className="
           relative
-          py-24
+          py-20
+          sm:py-24
           md:py-32
           overflow-hidden
           bg-black
@@ -69,12 +73,14 @@ function About() {
             left-1/2
             -translate-x-1/2
             -translate-y-1/2
-            w-[500px]
-            h-[500px]
+            w-[300px]
+            h-[300px]
+            sm:w-[500px]
+            sm:h-[500px]
             md:w-[700px]
             md:h-[700px]
             bg-green-500/20
-            blur-[150px]
+            blur-[120px]
             rounded-full
           "
         />
@@ -108,7 +114,7 @@ function About() {
             }}
 
             className="
-              text-4xl
+              text-3xl
               sm:text-5xl
               md:text-7xl
               font-black
@@ -141,8 +147,7 @@ function About() {
 
             className="
               mt-6
-              md:mt-8
-              text-base
+              text-sm
               sm:text-lg
               md:text-xl
               text-gray-300
@@ -163,7 +168,7 @@ function About() {
 
       {/* ABOUT SECTION */}
 
-      <section className="py-20 md:py-28">
+      <section className="py-16 sm:py-20 md:py-28">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
@@ -172,7 +177,8 @@ function About() {
               grid
               grid-cols-1
               lg:grid-cols-2
-              gap-14
+              gap-12
+              lg:gap-16
               items-center
             "
           >
@@ -207,8 +213,10 @@ function About() {
                   absolute
                   -top-6
                   -left-6
-                  w-32
-                  h-32
+                  w-24
+                  h-24
+                  sm:w-32
+                  sm:h-32
                   bg-green-500/20
                   blur-3xl
                   rounded-full
@@ -222,11 +230,11 @@ function About() {
                   relative
                   z-10
                   w-full
-                  h-[350px]
+                  h-[300px]
                   sm:h-[450px]
                   md:h-[550px]
                   object-cover
-                  rounded-[35px]
+                  rounded-[30px]
                   shadow-[0_15px_50px_rgba(0,0,0,0.15)]
                 "
               />
@@ -263,6 +271,7 @@ function About() {
                   uppercase
                   tracking-[4px]
                   font-semibold
+                  text-sm
                 "
               >
                 Who We Are
@@ -271,7 +280,8 @@ function About() {
               <h2
                 className="
                   mt-5
-                  text-4xl
+                  text-3xl
+                  sm:text-4xl
                   md:text-5xl
                   font-black
                   text-black
@@ -288,7 +298,8 @@ function About() {
                 className="
                   mt-6
                   text-gray-600
-                  text-lg
+                  text-base
+                  sm:text-lg
                   leading-relaxed
                 "
               >
@@ -303,7 +314,8 @@ function About() {
                 className="
                   mt-5
                   text-gray-600
-                  text-lg
+                  text-base
+                  sm:text-lg
                   leading-relaxed
                 "
               >
@@ -329,7 +341,8 @@ function About() {
                     key={index}
                     className="
                       flex
-                      items-center
+                      items-start
+                      sm:items-center
                       gap-4
                     "
                   >
@@ -353,8 +366,10 @@ function About() {
                     <p
                       className="
                         text-gray-700
-                        text-lg
+                        text-base
+                        sm:text-lg
                         font-medium
+                        leading-relaxed
                       "
                     >
                       {item}
@@ -374,12 +389,12 @@ function About() {
 
       </section>
 
-
-      {/* WHY CHOOSE US */}
+            {/* WHY CHOOSE US */}
 
       <section
         className="
-          py-20
+          py-16
+          sm:py-20
           md:py-28
           bg-[#f8f5f0]
           relative
@@ -395,8 +410,12 @@ function About() {
             top-0
             left-1/2
             -translate-x-1/2
-            w-[600px]
-            h-[600px]
+            w-[350px]
+            h-[350px]
+            sm:w-[500px]
+            sm:h-[500px]
+            md:w-[600px]
+            md:h-[600px]
             bg-green-400/10
             blur-[120px]
             rounded-full
@@ -405,7 +424,30 @@ function About() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
-          <div className="text-center">
+          {/* TITLE */}
+
+          <motion.div
+
+            initial={{
+              opacity: 0,
+              y: 30
+            }}
+
+            whileInView={{
+              opacity: 1,
+              y: 0
+            }}
+
+            transition={{
+              duration: 0.7
+            }}
+
+            viewport={{
+              once: true
+            }}
+
+            className="text-center"
+          >
 
             <p
               className="
@@ -413,6 +455,7 @@ function About() {
                 uppercase
                 tracking-[4px]
                 font-semibold
+                text-sm
               "
             >
               Why Choose Us
@@ -421,7 +464,8 @@ function About() {
             <h2
               className="
                 mt-5
-                text-4xl
+                text-3xl
+                sm:text-4xl
                 md:text-5xl
                 font-black
                 text-black
@@ -430,7 +474,7 @@ function About() {
               Premium Halal Experience
             </h2>
 
-          </div>
+          </motion.div>
 
 
           {/* CARDS */}
@@ -441,8 +485,10 @@ function About() {
               grid-cols-1
               sm:grid-cols-2
               lg:grid-cols-4
-              gap-8
-              mt-16
+              gap-6
+              md:gap-8
+              mt-14
+              md:mt-16
             "
           >
 
@@ -450,25 +496,29 @@ function About() {
               {
                 icon: <FaLeaf />,
                 title: "Fresh Products",
-                desc: "Fresh halal meats and groceries prepared daily."
+                desc: "Fresh halal meats and groceries prepared daily.",
+                color: "from-green-400 to-emerald-600"
               },
 
               {
                 icon: <FaShieldAlt />,
                 title: "Trusted Halal",
-                desc: "100% halal-certified premium quality products."
+                desc: "100% halal-certified premium quality products.",
+                color: "from-lime-400 to-green-700"
               },
 
               {
                 icon: <FaTruck />,
                 title: "Fast Service",
-                desc: "Quick customer service with premium care."
+                desc: "Quick customer service with premium care.",
+                color: "from-emerald-400 to-cyan-600"
               },
 
               {
                 icon: <FaUsers />,
                 title: "Customer Care",
-                desc: "Friendly service focused on customer satisfaction."
+                desc: "Friendly service focused on customer satisfaction.",
+                color: "from-green-500 to-teal-600"
               }
 
             ].map((item, index) => (
@@ -497,58 +547,97 @@ function About() {
                 }}
 
                 whileHover={{
-                  y: -10
+                  y: -10,
+                  scale: 1.02
                 }}
 
                 className="
-                  bg-white
+                  relative
+                  overflow-hidden
                   rounded-[30px]
-                  p-8
-                  shadow-[0_15px_50px_rgba(0,0,0,0.08)]
+                  bg-white/90
+                  backdrop-blur-xl
                   border
-                  border-zinc-200
+                  border-white/40
+                  shadow-[0_10px_40px_rgba(0,0,0,0.08)]
+                  p-6
+                  md:p-8
                   text-center
+                  group
                 "
               >
 
+                {/* HOVER GLOW */}
+
                 <div
-                  className="
-                    w-20
-                    h-20
+                  className={`
+                    absolute
+                    inset-0
+                    opacity-0
+                    group-hover:opacity-100
+                    transition
+                    duration-500
+                    bg-gradient-to-br
+                    ${item.color}
+                    blur-3xl
+                  `}
+                />
+
+                {/* ICON */}
+
+                <div
+                  className={`
+                    relative
+                    z-10
+                    w-16
+                    h-16
+                    sm:w-20
+                    sm:h-20
                     mx-auto
                     rounded-3xl
-                    bg-green-500
+                    bg-gradient-to-br
+                    ${item.color}
                     flex
                     items-center
                     justify-center
                     text-white
-                    text-4xl
+                    text-3xl
+                    sm:text-4xl
                     shadow-2xl
-                  "
+                  `}
                 >
                   {item.icon}
                 </div>
 
-                <h3
-                  className="
-                    mt-8
-                    text-2xl
-                    font-bold
-                    text-black
-                  "
-                >
-                  {item.title}
-                </h3>
+                {/* CONTENT */}
 
-                <p
-                  className="
-                    mt-4
-                    text-gray-600
-                    leading-relaxed
-                  "
-                >
-                  {item.desc}
-                </p>
+                <div className="relative z-10">
+
+                  <h3
+                    className="
+                      mt-6
+                      text-xl
+                      sm:text-2xl
+                      font-bold
+                      text-black
+                    "
+                  >
+                    {item.title}
+                  </h3>
+
+                  <p
+                    className="
+                      mt-4
+                      text-gray-600
+                      leading-relaxed
+                      text-sm
+                      sm:text-base
+                    "
+                  >
+                    {item.desc}
+                  </p>
+
+                </div>
 
               </motion.div>
 
@@ -566,7 +655,8 @@ function About() {
       <section
         className="
           relative
-          py-24
+          py-20
+          sm:py-24
           md:py-32
           overflow-hidden
         "
@@ -582,6 +672,8 @@ function About() {
             to-black
           "
         />
+
+        {/* GLOW */}
 
         <motion.div
 
@@ -600,8 +692,12 @@ function About() {
             left-1/2
             -translate-x-1/2
             -translate-y-1/2
-            w-[700px]
-            h-[700px]
+            w-[350px]
+            h-[350px]
+            sm:w-[500px]
+            sm:h-[500px]
+            md:w-[700px]
+            md:h-[700px]
             bg-green-500/20
             blur-[150px]
             rounded-full
@@ -621,9 +717,28 @@ function About() {
           "
         >
 
-          <h2
+          <motion.h2
+
+            initial={{
+              opacity: 0,
+              y: 40
+            }}
+
+            whileInView={{
+              opacity: 1,
+              y: 0
+            }}
+
+            transition={{
+              duration: 0.8
+            }}
+
+            viewport={{
+              once: true
+            }}
+
             className="
-              text-4xl
+              text-3xl
               sm:text-5xl
               md:text-6xl
               font-black
@@ -637,12 +752,32 @@ function About() {
               Everyday For Your Family
             </span>
 
-          </h2>
+          </motion.h2>
 
-          <p
+          <motion.p
+
+            initial={{
+              opacity: 0,
+              y: 30
+            }}
+
+            whileInView={{
+              opacity: 1,
+              y: 0
+            }}
+
+            transition={{
+              duration: 0.8,
+              delay: 0.2
+            }}
+
+            viewport={{
+              once: true
+            }}
+
             className="
               mt-8
-              text-base
+              text-sm
               sm:text-lg
               md:text-xl
               text-gray-300
@@ -654,9 +789,18 @@ function About() {
             Premium halal meat, frozen foods,
             grocery essentials and fresh products
             delivered with trust and quality.
-          </p>
+          </motion.p>
 
-          <button
+          <motion.button
+
+            whileHover={{
+              scale: 1.05
+            }}
+
+            whileTap={{
+              scale: 0.95
+            }}
+
             className="
               mt-10
               bg-green-500
@@ -672,15 +816,273 @@ function About() {
               font-semibold
               tracking-wide
               shadow-[0_0_40px_rgba(34,197,94,0.5)]
-              text-lg
+              text-base
+              sm:text-lg
             "
           >
             Visit Our Store
-          </button>
+          </motion.button>
 
         </div>
 
       </section>
+
+      {/* =========================
+         FOOTER
+      ========================= */}
+      
+      <footer
+        className="
+          bg-black
+          text-white
+          pt-14
+          pb-8
+          mt-20
+        "
+      >
+      
+        <div
+          className="
+            max-w-7xl
+            mx-auto
+            px-4
+            sm:px-6
+          "
+        >
+      
+          {/* TOP SECTION */}
+      
+          <div
+            className="
+              flex
+              flex-col
+              lg:flex-row
+              justify-between
+              gap-10
+              border-b
+              border-zinc-800
+              pb-10
+            "
+          >
+      
+            {/* LEFT */}
+      
+            <div className="max-w-xl">
+      
+              <h2
+                className="
+                  text-2xl
+                  sm:text-3xl
+                  font-black
+                "
+              >
+                Bismillah
+                <span className="text-green-400">
+                  {" "}Butcher & Grocery
+                </span>
+              </h2>
+      
+              <p
+                className="
+                  mt-5
+                  text-gray-400
+                  leading-relaxed
+                  text-sm
+                  sm:text-base
+                "
+              >
+                Premium halal meat, fresh vegetables,
+                groceries and frozen foods delivered
+                with quality, freshness and trust.
+              </p>
+      
+            </div>
+      
+      
+            {/* SOCIALS */}
+      
+            <div>
+      
+              <h3
+                className="
+                  text-lg
+                  font-bold
+                  mb-5
+                "
+              >
+                Follow Us
+              </h3>
+      
+              <div
+                className="
+                  flex
+                  flex-wrap
+                  gap-4
+                "
+              >
+      
+                {/* FACEBOOK */}
+      
+                <a
+                  href="https://facebook.com/bismillahbutchers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-blue-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaFacebookF />
+                </a>
+      
+      
+                {/* INSTAGRAM */}
+      
+                <a
+                  href="https://instagram.com/bismillahbutchers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-pink-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaInstagram />
+                </a>
+      
+      
+                {/* WHATSAPP */}
+      
+                <a
+                  href="https://wa.me/447404943400"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-12
+                    h-12
+                    rounded-2xl
+                    bg-zinc-900
+                    hover:bg-green-600
+                    transition
+                    duration-300
+                    flex
+                    items-center
+                    justify-center
+                    text-lg
+                  "
+                >
+                  <FaWhatsapp />
+                </a>
+      
+              </div>
+      
+            </div>
+      
+          </div>
+      
+      
+          {/* BOTTOM SECTION */}
+      
+          <div
+            className="
+              mt-8
+              flex
+              flex-col
+              md:flex-row
+              items-center
+              justify-between
+              gap-5
+              text-sm
+              text-gray-400
+              text-center
+            "
+          >
+      
+            {/* LEFT */}
+      
+            <p>
+              © 2026 Halal Butcher & Grocery.
+              All Rights Reserved.
+            </p>
+      
+      
+            {/* CENTER */}
+      
+            <div
+              className="
+                flex
+                flex-wrap
+                justify-center
+                gap-4
+              "
+            >
+      
+              <button
+                className="
+                  hover:text-green-400
+                  transition
+                "
+              >
+                Privacy Policy
+              </button>
+      
+              <button
+                className="
+                  hover:text-green-400
+                  transition
+                "
+              >
+                Cookies
+              </button>
+      
+            </div>
+      
+      
+            {/* RIGHT */}
+      
+            <p>
+        Powered by{" "}
+      
+        <a
+          href="https://www.neirahtech.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            text-green-400
+            font-semibold
+            hover:text-green-300
+            transition
+            duration-300
+          "
+        >
+          Neirahtech
+        </a>
+      
+      </p>
+      
+          </div>
+      
+        </div>
+      
+      </footer>
 
     </div>
   );
