@@ -814,40 +814,6 @@ const handleSubmit = async (e) => {
 
                   </a>
 
-
-                  {/* WHATSAPP */}
-
-                  <a
-                    href="https://wa.me/447404943400"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="
-                      flex
-                      items-center
-                      justify-center
-                      gap-3
-                      w-full
-                      sm:w-auto
-                      bg-black
-                      hover:bg-green-600
-                      transition
-                      duration-300
-                      text-white
-                      px-5
-                      py-4
-                      rounded-2xl
-                      shadow-lg
-                    "
-                  >
-
-                    <FaWhatsapp className="text-xl" />
-
-                    <span className="font-semibold">
-                      WhatsApp Us
-                    </span>
-
-                  </a>
-
                 </div>
 
               </div>
@@ -880,6 +846,7 @@ const handleSubmit = async (e) => {
       mx-auto
       px-4
       sm:px-6
+      lg:px-8
     "
   >
 
@@ -891,7 +858,8 @@ const handleSubmit = async (e) => {
         flex-col
         lg:flex-row
         justify-between
-        gap-10
+        items-start
+        gap-12
         border-b
         border-zinc-800
         pb-10
@@ -900,13 +868,20 @@ const handleSubmit = async (e) => {
 
       {/* LEFT */}
 
-      <div className="max-w-xl">
+      <div
+        className="
+          w-full
+          lg:w-1/2
+        "
+      >
 
         <h2
           className="
             text-2xl
             sm:text-3xl
+            md:text-4xl
             font-black
+            leading-tight
           "
         >
           Bismillah
@@ -922,6 +897,7 @@ const handleSubmit = async (e) => {
             leading-relaxed
             text-sm
             sm:text-base
+            max-w-lg
           "
         >
           Premium halal meat, fresh vegetables,
@@ -934,7 +910,12 @@ const handleSubmit = async (e) => {
 
       {/* SOCIALS */}
 
-      <div>
+      <div
+        className="
+          w-full
+          lg:w-auto
+        "
+      >
 
         <h3
           className="
@@ -949,7 +930,7 @@ const handleSubmit = async (e) => {
         <div
           className="
             flex
-            flex-wrap
+            items-center
             gap-4
           "
         >
@@ -963,6 +944,8 @@ const handleSubmit = async (e) => {
             className="
               w-12
               h-12
+              sm:w-14
+              sm:h-14
               rounded-2xl
               bg-zinc-900
               hover:bg-blue-600
@@ -972,6 +955,7 @@ const handleSubmit = async (e) => {
               items-center
               justify-center
               text-lg
+              sm:text-xl
             "
           >
             <FaFacebookF />
@@ -987,6 +971,8 @@ const handleSubmit = async (e) => {
             className="
               w-12
               h-12
+              sm:w-14
+              sm:h-14
               rounded-2xl
               bg-zinc-900
               hover:bg-pink-600
@@ -996,12 +982,11 @@ const handleSubmit = async (e) => {
               items-center
               justify-center
               text-lg
+              sm:text-xl
             "
           >
             <FaInstagram />
           </a>
-
-          
 
         </div>
 
@@ -1029,7 +1014,11 @@ const handleSubmit = async (e) => {
 
       {/* LEFT */}
 
-      <p>
+      <p
+        className="
+          leading-relaxed
+        "
+      >
         © 2026 Bismillah Butcher & Grocery.
         All Rights Reserved.
       </p>
@@ -1042,6 +1031,7 @@ const handleSubmit = async (e) => {
           flex
           flex-wrap
           justify-center
+          items-center
           gap-4
         "
       >
@@ -1050,6 +1040,7 @@ const handleSubmit = async (e) => {
           className="
             hover:text-green-400
             transition
+            duration-300
           "
         >
           Privacy Policy
@@ -1059,6 +1050,7 @@ const handleSubmit = async (e) => {
           className="
             hover:text-green-400
             transition
+            duration-300
           "
         >
           Cookies
@@ -1069,25 +1061,29 @@ const handleSubmit = async (e) => {
 
       {/* RIGHT */}
 
-      <p>
-  Powered by{" "}
+      <p
+        className="
+          leading-relaxed
+        "
+      >
+        Powered by{" "}
 
-  <a
-    href="https://www.neirahtech.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="
-      text-green-400
-      font-semibold
-      hover:text-green-300
-      transition
-      duration-300
-    "
-  >
-    Neirahtech
-  </a>
+        <a
+          href="https://www.neirahtech.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            text-green-400
+            font-semibold
+            hover:text-green-300
+            transition
+            duration-300
+          "
+        >
+          Neirahtech
+        </a>
 
-</p>
+      </p>
 
     </div>
 

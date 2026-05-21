@@ -1193,6 +1193,7 @@ function Home() {
       mx-auto
       px-4
       sm:px-6
+      lg:px-8
     "
   >
 
@@ -1204,7 +1205,8 @@ function Home() {
         flex-col
         lg:flex-row
         justify-between
-        gap-10
+        items-start
+        gap-12
         border-b
         border-zinc-800
         pb-10
@@ -1213,13 +1215,20 @@ function Home() {
 
       {/* LEFT */}
 
-      <div className="max-w-xl">
+      <div
+        className="
+          w-full
+          lg:w-1/2
+        "
+      >
 
         <h2
           className="
             text-2xl
             sm:text-3xl
+            md:text-4xl
             font-black
+            leading-tight
           "
         >
           Bismillah
@@ -1235,6 +1244,7 @@ function Home() {
             leading-relaxed
             text-sm
             sm:text-base
+            max-w-lg
           "
         >
           Premium halal meat, fresh vegetables,
@@ -1247,7 +1257,12 @@ function Home() {
 
       {/* SOCIALS */}
 
-      <div>
+      <div
+        className="
+          w-full
+          lg:w-auto
+        "
+      >
 
         <h3
           className="
@@ -1262,7 +1277,7 @@ function Home() {
         <div
           className="
             flex
-            flex-wrap
+            items-center
             gap-4
           "
         >
@@ -1276,6 +1291,8 @@ function Home() {
             className="
               w-12
               h-12
+              sm:w-14
+              sm:h-14
               rounded-2xl
               bg-zinc-900
               hover:bg-blue-600
@@ -1285,6 +1302,7 @@ function Home() {
               items-center
               justify-center
               text-lg
+              sm:text-xl
             "
           >
             <FaFacebookF />
@@ -1300,6 +1318,8 @@ function Home() {
             className="
               w-12
               h-12
+              sm:w-14
+              sm:h-14
               rounded-2xl
               bg-zinc-900
               hover:bg-pink-600
@@ -1309,6 +1329,7 @@ function Home() {
               items-center
               justify-center
               text-lg
+              sm:text-xl
             "
           >
             <FaInstagram />
@@ -1340,7 +1361,11 @@ function Home() {
 
       {/* LEFT */}
 
-      <p>
+      <p
+        className="
+          leading-relaxed
+        "
+      >
         © 2026 Bismillah Butcher & Grocery.
         All Rights Reserved.
       </p>
@@ -1353,6 +1378,7 @@ function Home() {
           flex
           flex-wrap
           justify-center
+          items-center
           gap-4
         "
       >
@@ -1361,6 +1387,7 @@ function Home() {
           className="
             hover:text-green-400
             transition
+            duration-300
           "
         >
           Privacy Policy
@@ -1370,6 +1397,7 @@ function Home() {
           className="
             hover:text-green-400
             transition
+            duration-300
           "
         >
           Cookies
@@ -1380,25 +1408,29 @@ function Home() {
 
       {/* RIGHT */}
 
-      <p>
-  Powered by{" "}
+      <p
+        className="
+          leading-relaxed
+        "
+      >
+        Powered by{" "}
 
-  <a
-    href="https://www.neirahtech.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="
-      text-green-400
-      font-semibold
-      hover:text-green-300
-      transition
-      duration-300
-    "
-  >
-    Neirahtech
-  </a>
+        <a
+          href="https://www.neirahtech.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            text-green-400
+            font-semibold
+            hover:text-green-300
+            transition
+            duration-300
+          "
+        >
+          Neirahtech
+        </a>
 
-</p>
+      </p>
 
     </div>
 

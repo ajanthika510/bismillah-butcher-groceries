@@ -699,211 +699,243 @@ function Products() {
       ========================= */}
       
       <footer
+  className="
+    bg-black
+    text-white
+    pt-14
+    pb-8
+    mt-20
+  "
+>
+
+  <div
+    className="
+      max-w-7xl
+      mx-auto
+      px-4
+      sm:px-6
+      lg:px-8
+    "
+  >
+
+    {/* TOP SECTION */}
+
+    <div
+      className="
+        flex
+        flex-col
+        lg:flex-row
+        justify-between
+        items-start
+        gap-12
+        border-b
+        border-zinc-800
+        pb-10
+      "
+    >
+
+      {/* LEFT */}
+
+      <div
         className="
-          bg-black
-          text-white
-          pt-14
-          pb-8
-          mt-20
+          w-full
+          lg:w-1/2
         "
       >
-      
-        <div
+
+        <h2
           className="
-            max-w-7xl
-            mx-auto
-            px-4
-            sm:px-6
+            text-2xl
+            sm:text-3xl
+            md:text-4xl
+            font-black
+            leading-tight
           "
         >
-      
-          {/* TOP SECTION */}
-      
-          <div
-            className="
-              flex
-              flex-col
-              lg:flex-row
-              justify-between
-              gap-10
-              border-b
-              border-zinc-800
-              pb-10
-            "
-          >
-      
-            {/* LEFT */}
-      
-            <div className="max-w-xl">
-      
-              <h2
-                className="
-                  text-2xl
-                  sm:text-3xl
-                  font-black
-                "
-              >
-                Bismillah
-                <span className="text-green-400">
-                  {" "}Butcher & Grocery
-                </span>
-              </h2>
-      
-              <p
-                className="
-                  mt-5
-                  text-gray-400
-                  leading-relaxed
-                  text-sm
-                  sm:text-base
-                "
-              >
-                Premium halal meat, fresh vegetables,
-                groceries and frozen foods delivered
-                with quality, freshness and trust.
-              </p>
-      
-            </div>
-      
-      
-            {/* SOCIALS */}
-      
-            <div>
-      
-              <h3
-                className="
-                  text-lg
-                  font-bold
-                  mb-5
-                "
-              >
-                Follow Us
-              </h3>
-      
-              <div
-                className="
-                  flex
-                  flex-wrap
-                  gap-4
-                "
-              >
-      
-                {/* FACEBOOK */}
-      
-                <a
-                  href="https://facebook.com/bismillahbutchers"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    w-12
-                    h-12
-                    rounded-2xl
-                    bg-zinc-900
-                    hover:bg-blue-600
-                    transition
-                    duration-300
-                    flex
-                    items-center
-                    justify-center
-                    text-lg
-                  "
-                >
-                  <FaFacebookF />
-                </a>
-      
-      
-                {/* INSTAGRAM */}
-      
-                <a
-                  href="https://instagram.com/bismillahbutchers"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    w-12
-                    h-12
-                    rounded-2xl
-                    bg-zinc-900
-                    hover:bg-pink-600
-                    transition
-                    duration-300
-                    flex
-                    items-center
-                    justify-center
-                    text-lg
-                  "
-                >
-                  <FaInstagram />
-                </a>
+          Bismillah
+          <span className="text-green-400">
+            {" "}Butcher & Grocery
+          </span>
+        </h2>
 
-              </div>
-      
-            </div>
-      
-          </div>
-      
-      
-          {/* BOTTOM SECTION */}
-      
-          <div
+        <p
+          className="
+            mt-5
+            text-gray-400
+            leading-relaxed
+            text-sm
+            sm:text-base
+            max-w-lg
+          "
+        >
+          Premium halal meat, fresh vegetables,
+          groceries and frozen foods delivered
+          with quality, freshness and trust.
+        </p>
+
+      </div>
+
+
+      {/* SOCIALS */}
+
+      <div
+        className="
+          w-full
+          lg:w-auto
+        "
+      >
+
+        <h3
+          className="
+            text-lg
+            font-bold
+            mb-5
+          "
+        >
+          Follow Us
+        </h3>
+
+        <div
+          className="
+            flex
+            items-center
+            gap-4
+          "
+        >
+
+          {/* FACEBOOK */}
+
+          <a
+            href="https://facebook.com/bismillahbutchers"
+            target="_blank"
+            rel="noopener noreferrer"
             className="
-              mt-8
+              w-12
+              h-12
+              sm:w-14
+              sm:h-14
+              rounded-2xl
+              bg-zinc-900
+              hover:bg-blue-600
+              transition
+              duration-300
               flex
-              flex-col
-              md:flex-row
               items-center
-              justify-between
-              gap-5
-              text-sm
-              text-gray-400
-              text-center
+              justify-center
+              text-lg
+              sm:text-xl
             "
           >
-      
-            {/* LEFT */}
-      
-            <p>
-              © 2026 Bismillah Butcher & Grocery.
-              All Rights Reserved.
-            </p>
-      
-      
-            {/* CENTER */}
-      
-            <div
-              className="
-                flex
-                flex-wrap
-                justify-center
-                gap-4
-              "
-            >
-      
-              <button
-                className="
-                  hover:text-green-400
-                  transition
-                "
-              >
-                Privacy Policy
-              </button>
-      
-              <button
-                className="
-                  hover:text-green-400
-                  transition
-                "
-              >
-                Cookies
-              </button>
-      
-            </div>
-      
-      
-            {/* RIGHT */}
-      
-            <p>
+            <FaFacebookF />
+          </a>
+
+
+          {/* INSTAGRAM */}
+
+          <a
+            href="https://instagram.com/bismillahbutchers"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              w-12
+              h-12
+              sm:w-14
+              sm:h-14
+              rounded-2xl
+              bg-zinc-900
+              hover:bg-pink-600
+              transition
+              duration-300
+              flex
+              items-center
+              justify-center
+              text-lg
+              sm:text-xl
+            "
+          >
+            <FaInstagram />
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    {/* BOTTOM SECTION */}
+
+    <div
+      className="
+        mt-8
+        flex
+        flex-col
+        md:flex-row
+        items-center
+        justify-between
+        gap-5
+        text-sm
+        text-gray-400
+        text-center
+      "
+    >
+
+      {/* LEFT */}
+
+      <p
+        className="
+          leading-relaxed
+        "
+      >
+        © 2026 Bismillah Butcher & Grocery.
+        All Rights Reserved.
+      </p>
+
+
+      {/* CENTER */}
+
+      <div
+        className="
+          flex
+          flex-wrap
+          justify-center
+          items-center
+          gap-4
+        "
+      >
+
+        <button
+          className="
+            hover:text-green-400
+            transition
+            duration-300
+          "
+        >
+          Privacy Policy
+        </button>
+
+        <button
+          className="
+            hover:text-green-400
+            transition
+            duration-300
+          "
+        >
+          Cookies
+        </button>
+
+      </div>
+
+
+      {/* RIGHT */}
+
+      <p
+        className="
+          leading-relaxed
+        "
+      >
         Powered by{" "}
-      
+
         <a
           href="https://www.neirahtech.com/"
           target="_blank"
@@ -918,14 +950,14 @@ function Products() {
         >
           Neirahtech
         </a>
-      
+
       </p>
-      
-          </div>
-      
-        </div>
-      
-      </footer>
+
+    </div>
+
+  </div>
+
+</footer>
 
     </div>
 
