@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
+import { useSearchParams } from "react-router-dom";
+
 import {
   FaTruck,
   FaLeaf,
@@ -17,6 +19,7 @@ import {
 } from "react-icons/fa";
 
 import heroMeat from "../assets/meat.png";
+
 
 function Home() {
 
@@ -1135,6 +1138,8 @@ function Home() {
                     {item.desc}
                   </p>
 
+                 <Link to={`/products?category=${encodeURIComponent("Fresh Vegetables")}`}>
+
                   <button
                     className="
                       mt-8
@@ -1152,6 +1157,8 @@ function Home() {
                   >
                     Explore Category
                   </button>
+
+                 </Link> 
 
                 </div>
 
