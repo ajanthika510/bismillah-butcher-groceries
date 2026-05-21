@@ -1,35 +1,76 @@
-import { useContext } from "react";
-
-import { CartContext } from "../context/CartContext";
+import {
+  useContext
+} from "react";
 
 import {
-  FaFacebookF,
-  FaInstagram,
+  CartContext
+} from "../context/CartContext";
+
+import {
+  FaTrash,
+  FaMinus,
+  FaPlus,
   FaWhatsapp
 } from "react-icons/fa";
 
 function Cart() {
 
   const {
-
     cartItems,
-
     removeFromCart,
-
     increaseQty,
-
-    decreaseQty
-
+    decreaseQty,
+    clearCart
   } = useContext(CartContext);
 
+  // TOTAL
   const total = cartItems.reduce(
-
     (sum, item) =>
-
-      sum + item.price * item.quantity,
-
+      sum +
+      item.price * item.quantity,
     0
   );
+
+  // WHATSAPP ORDER
+  const handleProceedOrder = () => {
+
+  if (cartItems.length === 0) return;
+
+  const phoneNumber = "447404943400";
+
+  let message =
+    `🛒 New Order - Bismillah Butcher & Grocery\n\n`;
+
+  cartItems.forEach((item, index) => {
+
+    message +=
+      `${index + 1}. ${item.name}\n` +
+      `Quantity: ${item.quantity}\n` +
+      `Price: Rs. ${item.price}\n` +
+      `Subtotal: Rs. ${
+        item.price * item.quantity
+      }\n\n`;
+  });
+
+  message +=
+    `Total: Rs. ${total.toFixed(2)}`;
+
+  // ENCODE MESSAGE PROPERLY
+  const encodedMessage =
+    encodeURIComponent(message);
+
+  const whatsappURL =
+    `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
+  // CLEAR CART AFTER ORDER
+  clearCart();
+};
+
 
   return (
 
@@ -39,9 +80,9 @@ function Cart() {
         bg-zinc-100
         px-4
         sm:px-6
-        md:px-10
+        lg:px-10
         py-8
-        md:py-10
+        sm:py-10
       "
     >
 
@@ -51,12 +92,11 @@ function Cart() {
         className="
           text-3xl
           sm:text-4xl
-          md:text-5xl
+          lg:text-5xl
           font-extrabold
-          mb-8
-          md:mb-10
           text-center
           text-green-600
+          mb-10
         "
       >
         Your Cart
@@ -69,13 +109,12 @@ function Cart() {
 
         <div
           className="
-            text-center
             bg-white
-            p-8
-            sm:p-12
-            md:p-16
-            rounded-2xl
+            rounded-3xl
             shadow-lg
+            p-10
+            sm:p-16
+            text-center
           "
         >
 
@@ -84,7 +123,7 @@ function Cart() {
               text-2xl
               sm:text-3xl
               font-bold
-              mb-4
+              text-black
             "
           >
             Cart is Empty
@@ -92,19 +131,28 @@ function Cart() {
 
           <p
             className="
+              text-gray-500
+              mt-4
               text-sm
               sm:text-base
-              text-gray-500
             "
           >
-            Add fresh halal products to continue shopping.
+            Add fresh halal products
+            to continue shopping.
           </p>
 
         </div>
 
       ) : (
 
-        <div className="grid gap-5 sm:gap-6">
+        <div
+          className="
+            grid
+            gap-6
+          "
+        >
+
+          {/* CART ITEMS */}
 
           {cartItems.map((item) => (
 
@@ -112,7 +160,7 @@ function Cart() {
               key={item.id}
               className="
                 bg-white
-                rounded-2xl
+                rounded-3xl
                 shadow-lg
                 p-4
                 sm:p-6
@@ -120,25 +168,22 @@ function Cart() {
                 flex-col
                 lg:flex-row
                 justify-between
-                items-center
                 gap-6
               "
             >
 
-              {/* LEFT SECTION */}
+              {/* LEFT */}
 
               <div
                 className="
                   flex
                   flex-col
                   sm:flex-row
-                  items-center
                   gap-5
-                  w-full
+                  items-center
+                  sm:items-start
                 "
               >
-
-                {/* IMAGE */}
 
                 <img
                   src={
@@ -147,25 +192,19 @@ function Cart() {
                   }
                   alt={item.name}
                   className="
-                    w-24
-                    h-24
-                    sm:w-28
-                    sm:h-28
-                    md:w-32
-                    md:h-32
+                    w-28
+                    h-28
+                    sm:w-32
+                    sm:h-32
                     object-cover
-                    rounded-xl
-                    shrink-0
+                    rounded-2xl
                   "
                 />
-
-                {/* INFO */}
 
                 <div
                   className="
                     text-center
                     sm:text-left
-                    flex-1
                   "
                 >
 
@@ -174,6 +213,7 @@ function Cart() {
                       text-xl
                       sm:text-2xl
                       font-bold
+                      text-black
                     "
                   >
                     {item.name}
@@ -183,8 +223,6 @@ function Cart() {
                     className="
                       text-gray-500
                       mt-2
-                      text-sm
-                      sm:text-base
                     "
                   >
                     {item.category}
@@ -207,16 +245,15 @@ function Cart() {
               </div>
 
 
-              {/* RIGHT SECTION */}
+              {/* RIGHT */}
 
               <div
                 className="
                   flex
                   flex-col
                   items-center
+                  justify-center
                   gap-4
-                  w-full
-                  lg:w-auto
                 "
               >
 
@@ -226,10 +263,11 @@ function Cart() {
                   className="
                     flex
                     items-center
-                    gap-3
-                    sm:gap-4
+                    gap-4
                   "
                 >
+
+                  {/* DECREASE */}
 
                   <button
                     onClick={() =>
@@ -247,8 +285,10 @@ function Cart() {
                       sm:text-xl
                     "
                   >
-                    -
+                    <FaMinus />
                   </button>
+
+                  {/* QTY */}
 
                   <span
                     className="
@@ -261,6 +301,8 @@ function Cart() {
                   >
                     {item.quantity}
                   </span>
+
+                  {/* INCREASE */}
 
                   <button
                     onClick={() =>
@@ -278,13 +320,13 @@ function Cart() {
                       sm:text-xl
                     "
                   >
-                    +
+                    <FaPlus />
                   </button>
 
                 </div>
 
 
-                {/* REMOVE BUTTON */}
+                {/* REMOVE */}
 
                 <button
                   onClick={() =>
@@ -297,15 +339,15 @@ function Cart() {
                     duration-300
                     text-white
                     px-5
-                    sm:px-6
                     py-2
                     rounded-xl
-                    text-sm
-                    sm:text-base
-                    w-full
-                    sm:w-auto
+                    flex
+                    items-center
+                    gap-2
                   "
                 >
+                  <FaTrash />
+
                   Remove
                 </button>
 
@@ -322,10 +364,10 @@ function Cart() {
             className="
               bg-black
               text-white
-              rounded-2xl
-              p-5
+              rounded-3xl
+              p-6
               sm:p-8
-              mt-6
+              mt-4
               shadow-xl
             "
           >
@@ -333,11 +375,9 @@ function Cart() {
             <div
               className="
                 flex
-                flex-col
-                sm:flex-row
                 justify-between
                 items-center
-                gap-4
+                mb-6
               "
             >
 
@@ -365,290 +405,71 @@ function Cart() {
             </div>
 
 
-            {/* CHECKOUT BUTTON */}
+            {/* BUTTONS */}
 
-            <button
+            <div
               className="
-                w-full
-                mt-6
-                bg-green-500
-                hover:bg-green-600
-                transition
-                duration-300
-                text-white
-                py-3
-                sm:py-4
-                rounded-xl
-                text-sm
-                sm:text-base
-                font-semibold
+                flex
+                flex-col
+                sm:flex-row
+                gap-4
               "
             >
-              Proceed Order
-            </button>
+
+              {/* CLEAR CART */}
+
+              <button
+                onClick={clearCart}
+                className="
+                  flex-1
+                  bg-red-500
+                  hover:bg-red-600
+                  transition
+                  duration-300
+                  py-3
+                  rounded-xl
+                  text-white
+                  font-semibold
+                "
+              >
+                Clear Cart
+              </button>
+
+
+              {/* PROCEED ORDER */}
+
+              <button
+                onClick={handleProceedOrder}
+                className="
+                  flex-1
+                  bg-green-500
+                  hover:bg-green-600
+                  transition
+                  duration-300
+                  py-3
+                  rounded-xl
+                  text-white
+                  font-semibold
+                  flex
+                  items-center
+                  justify-center
+                  gap-3
+                "
+              >
+
+                <FaWhatsapp className="text-xl" />
+
+                Proceed Order
+
+              </button>
+
+            </div>
 
           </div>
 
         </div>
 
       )}
-
-      {/* =========================
-         FOOTER
-      ========================= */}
-      
-      <footer
-        className="
-          bg-black
-          text-white
-          pt-14
-          pb-8
-          mt-20
-        "
-      >
-      
-        <div
-          className="
-            max-w-7xl
-            mx-auto
-            px-4
-            sm:px-6
-          "
-        >
-      
-          {/* TOP SECTION */}
-      
-          <div
-            className="
-              flex
-              flex-col
-              lg:flex-row
-              justify-between
-              gap-10
-              border-b
-              border-zinc-800
-              pb-10
-            "
-          >
-      
-            {/* LEFT */}
-      
-            <div className="max-w-xl">
-      
-              <h2
-                className="
-                  text-2xl
-                  sm:text-3xl
-                  font-black
-                "
-              >
-                Bismillah
-                <span className="text-green-400">
-                  {" "}Butcher & Grocery
-                </span>
-              </h2>
-      
-              <p
-                className="
-                  mt-5
-                  text-gray-400
-                  leading-relaxed
-                  text-sm
-                  sm:text-base
-                "
-              >
-                Premium halal meat, fresh vegetables,
-                groceries and frozen foods delivered
-                with quality, freshness and trust.
-              </p>
-      
-            </div>
-      
-      
-            {/* SOCIALS */}
-      
-            <div>
-      
-              <h3
-                className="
-                  text-lg
-                  font-bold
-                  mb-5
-                "
-              >
-                Follow Us
-              </h3>
-      
-              <div
-                className="
-                  flex
-                  flex-wrap
-                  gap-4
-                "
-              >
-      
-                {/* FACEBOOK */}
-      
-                <a
-                  href="https://facebook.com/bismillahbutchers"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    w-12
-                    h-12
-                    rounded-2xl
-                    bg-zinc-900
-                    hover:bg-blue-600
-                    transition
-                    duration-300
-                    flex
-                    items-center
-                    justify-center
-                    text-lg
-                  "
-                >
-                  <FaFacebookF />
-                </a>
-      
-      
-                {/* INSTAGRAM */}
-      
-                <a
-                  href="https://instagram.com/bismillahbutchers"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    w-12
-                    h-12
-                    rounded-2xl
-                    bg-zinc-900
-                    hover:bg-pink-600
-                    transition
-                    duration-300
-                    flex
-                    items-center
-                    justify-center
-                    text-lg
-                  "
-                >
-                  <FaInstagram />
-                </a>
-      
-      
-                {/* WHATSAPP */}
-      
-                <a
-                  href="https://wa.me/447404943400"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    w-12
-                    h-12
-                    rounded-2xl
-                    bg-zinc-900
-                    hover:bg-green-600
-                    transition
-                    duration-300
-                    flex
-                    items-center
-                    justify-center
-                    text-lg
-                  "
-                >
-                  <FaWhatsapp />
-                </a>
-      
-              </div>
-      
-            </div>
-      
-          </div>
-      
-      
-          {/* BOTTOM SECTION */}
-      
-          <div
-            className="
-              mt-8
-              flex
-              flex-col
-              md:flex-row
-              items-center
-              justify-between
-              gap-5
-              text-sm
-              text-gray-400
-              text-center
-            "
-          >
-      
-            {/* LEFT */}
-      
-            <p>
-              © 2026 Halal Butcher & Grocery.
-              All Rights Reserved.
-            </p>
-      
-      
-            {/* CENTER */}
-      
-            <div
-              className="
-                flex
-                flex-wrap
-                justify-center
-                gap-4
-              "
-            >
-      
-              <button
-                className="
-                  hover:text-green-400
-                  transition
-                "
-              >
-                Privacy Policy
-              </button>
-      
-              <button
-                className="
-                  hover:text-green-400
-                  transition
-                "
-              >
-                Cookies
-              </button>
-      
-            </div>
-      
-      
-            {/* RIGHT */}
-      
-            <p>
-        Powered by{" "}
-      
-        <a
-          href="https://www.neirahtech.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="
-            text-green-400
-            font-semibold
-            hover:text-green-300
-            transition
-            duration-300
-          "
-        >
-          Neirahtech
-        </a>
-      
-      </p>
-      
-          </div>
-      
-        </div>
-      
-      </footer>
 
     </div>
   );

@@ -317,29 +317,6 @@ function Login() {
                 </a>
       
       
-                {/* WHATSAPP */}
-      
-                <a
-                  href="https://wa.me/447404943400"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    w-12
-                    h-12
-                    rounded-2xl
-                    bg-zinc-900
-                    hover:bg-green-600
-                    transition
-                    duration-300
-                    flex
-                    items-center
-                    justify-center
-                    text-lg
-                  "
-                >
-                  <FaWhatsapp />
-                </a>
-      
               </div>
       
             </div>
@@ -367,7 +344,7 @@ function Login() {
             {/* LEFT */}
       
             <p>
-              © 2026 Halal Butcher & Grocery.
+              © 2026 Bismillah Butcher & Grocery.
               All Rights Reserved.
             </p>
       

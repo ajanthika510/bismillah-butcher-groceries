@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
+
 import { motion } from "framer-motion";
 
 import {
   FaBoxOpen,
   FaShoppingCart,
   FaSearch,
-  FaPlus,
-  FaEdit,
-  FaTrash,
-  FaBars
+  FaBars,
+  FaTrash
 } from "react-icons/fa";
 
 import API from "../services/api";
@@ -16,31 +15,39 @@ import API from "../services/api";
 function AdminDashboard() {
 
   const [products, setProducts] = useState([]);
+  const [messages, setMessages] = useState([]);
+
   const [editId, setEditId] = useState(null);
+
   const [search, setSearch] = useState("");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const [sidebarOpen, setSidebarOpen] =
+    useState(false);
 
   const [formData, setFormData] = useState({
-
-  name: "",
-  description: "",
-  category: "",
-  portion: "",
-  price: "",
-  stock: "",
-  image: "",
-  isOffer: false
-});
+    name: "",
+    description: "",
+    category: "",
+    price: "",
+    stock: "",
+    image: "",
+    isOffer: false
+  });
 
   useEffect(() => {
+
     fetchProducts();
+
+    fetchMessages();
+
   }, []);
 
   const fetchProducts = async () => {
 
     try {
 
-      const res = await API.get("/products");
+      const res =
+        await API.get("/products");
 
       setProducts(res.data);
 
@@ -50,11 +57,36 @@ function AdminDashboard() {
     }
   };
 
+  const fetchMessages = async () => {
+
+    try {
+
+      const res =
+        await API.get("/messages");
+
+      setMessages(res.data);
+
+    } catch (error) {
+
+      console.log(error);
+    }
+  };
+
   const handleChange = (e) => {
+
+    const {
+      name,
+      value,
+      type,
+      checked
+    } = e.target;
 
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]:
+        type === "checkbox"
+          ? checked
+          : value
     });
   };
 
@@ -64,11 +96,22 @@ function AdminDashboard() {
 
     try {
 
+      const cleanedData = {
+
+        ...formData,
+
+        price:
+          formData.price || 0,
+
+        stock:
+          formData.stock || 0
+      };
+
       if (editId) {
 
         await API.put(
           `/products/${editId}`,
-          formData
+          cleanedData
         );
 
         alert("Product Updated");
@@ -77,7 +120,7 @@ function AdminDashboard() {
 
         await API.post(
           "/products",
-          formData
+          cleanedData
         );
 
         alert("Product Created");
@@ -89,7 +132,8 @@ function AdminDashboard() {
         category: "",
         price: "",
         stock: "",
-        image: ""
+        image: "",
+        isOffer: false
       });
 
       setEditId(null);
@@ -100,7 +144,7 @@ function AdminDashboard() {
 
       console.log(error);
 
-      alert("Operation failed");
+      alert("Operation Failed");
     }
   };
 
@@ -108,7 +152,9 @@ function AdminDashboard() {
 
     try {
 
-      await API.delete(`/products/${id}`);
+      await API.delete(
+        `/products/${id}`
+      );
 
       alert("Product Deleted");
 
@@ -118,54 +164,89 @@ function AdminDashboard() {
 
       console.log(error);
 
-      alert("Delete failed");
+      alert("Delete Failed");
+    }
+  };
+
+  const deleteMessage = async (id) => {
+
+    try {
+
+      await API.delete(
+        `/messages/${id}`
+      );
+
+      fetchMessages();
+
+    } catch (error) {
+
+      console.log(error);
     }
   };
 
   const handleEdit = (product) => {
 
-  setFormData({
-    name: product.name,
-    description: product.description,
-    category: product.category,
-    price: product.price,
-    stock: product.stock,
-    image: product.image,
-    isOffer: product.isOffer
-  });
+    setFormData({
 
-  setEditId(product.id);
+      name:
+        product.name || "",
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-};
+      description:
+        product.description || "",
 
-  const filteredProducts = products.filter((product) =>
+      category:
+        product.category || "",
 
-    product.name
-      .toLowerCase()
-      .includes(search.toLowerCase())
+      price:
+        product.price || "",
 
-    ||
+      stock:
+        product.stock || "",
 
-    product.category
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
+      image:
+        product.image || "",
+
+      isOffer:
+        product.isOffer || false
+    });
+
+    setEditId(product.id);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  const filteredProducts =
+    products.filter((product) =>
+
+      product.name
+        ?.toLowerCase()
+        .includes(
+          search.toLowerCase()
+        )
+
+      ||
+
+      product.category
+        ?.toLowerCase()
+        .includes(
+          search.toLowerCase()
+        )
+    );
 
   return (
 
     <div
-  className="
-    flex
-    min-h-screen
-    bg-zinc-100
-    pt-24
-     md:pt-28
-  "
->
+      className="
+        flex
+        min-h-screen
+        bg-zinc-100
+        pt-24
+        md:pt-28
+      "
+    >
 
       {/* SIDEBAR */}
 
@@ -204,13 +285,29 @@ function AdminDashboard() {
 
         <div className="mt-12 space-y-6">
 
-          <div className="flex items-center gap-4 text-lg">
+          <div
+            className="
+              flex
+              items-center
+              gap-4
+              text-lg
+            "
+          >
             <FaBoxOpen />
+
             Products
           </div>
 
-          <div className="flex items-center gap-4 text-lg">
+          <div
+            className="
+              flex
+              items-center
+              gap-4
+              text-lg
+            "
+          >
             <FaShoppingCart />
+
             Orders
           </div>
 
@@ -218,10 +315,15 @@ function AdminDashboard() {
 
       </div>
 
+      {/* MAIN */}
 
-      {/* MAIN CONTENT */}
-
-      <div className="flex-1 p-4 md:p-10">
+      <div
+        className="
+          flex-1
+          p-4
+          md:p-10
+        "
+      >
 
         {/* TOP BAR */}
 
@@ -236,7 +338,9 @@ function AdminDashboard() {
 
           <button
             onClick={() =>
-              setSidebarOpen(!sidebarOpen)
+              setSidebarOpen(
+                !sidebarOpen
+              )
             }
             className="
               md:hidden
@@ -261,7 +365,6 @@ function AdminDashboard() {
 
         </div>
 
-
         {/* STATS */}
 
         <div
@@ -283,6 +386,7 @@ function AdminDashboard() {
               shadow-lg
             "
           >
+
             <p className="text-gray-500">
               Total Products
             </p>
@@ -297,6 +401,7 @@ function AdminDashboard() {
             >
               {products.length}
             </h2>
+
           </div>
 
           <div
@@ -307,6 +412,7 @@ function AdminDashboard() {
               shadow-lg
             "
           >
+
             <p className="text-gray-500">
               Categories
             </p>
@@ -321,6 +427,7 @@ function AdminDashboard() {
             >
               12
             </h2>
+
           </div>
 
           <div
@@ -331,6 +438,7 @@ function AdminDashboard() {
               shadow-lg
             "
           >
+
             <p className="text-gray-500">
               In Stock
             </p>
@@ -346,15 +454,18 @@ function AdminDashboard() {
               {
                 products.reduce(
                   (total, item) =>
-                    total + Number(item.stock || 0),
+                    total +
+                    Number(
+                      item.stock || 0
+                    ),
                   0
                 )
               }
             </h2>
+
           </div>
 
         </div>
-
 
         {/* SEARCH */}
 
@@ -391,7 +502,6 @@ function AdminDashboard() {
 
         </div>
 
-
         {/* FORM */}
 
         <motion.form
@@ -410,127 +520,54 @@ function AdminDashboard() {
 
           className="
             bg-white
-            rounded-3xl
             p-6
-            md:p-10
-            shadow-xl
-            mb-14
+            rounded-3xl
+            shadow-lg
+            grid
+            gap-5
+            mb-12
           "
         >
 
-          <div
-            className="
-              flex
-              items-center
-              gap-4
-              mb-8
-            "
-          >
-
-            <div
-              className="
-                w-14
-                h-14
-                rounded-2xl
-                bg-green-500
-                flex
-                items-center
-                justify-center
-                text-white
-                text-2xl
-              "
-            >
-              <FaPlus />
-            </div>
-
-            <h2
-              className="
-                text-3xl
-                font-black
-              "
-            >
-              {
-                editId
-                  ? "Update Product"
-                  : "Create Product"
-              }
-            </h2>
-
-          </div>
-
-          <div
-            className="
-              grid
-              grid-cols-1
-              md:grid-cols-2
-              gap-6
-            "
-          >
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Product Name"
-              value={formData.name}
-              onChange={handleChange}
-              className="border p-4 rounded-2xl"
-            />
-
-            <input
-  type="text"
-  name="portion"
-  placeholder="Portion (Example: 5KG)"
-  value={formData.portion}
-  onChange={handleChange}
-  className="
-    w-full
-    border
-    rounded-xl
-    px-4
-    py-3
-  "
-/>
-
-            <input
-              type="number"
-              name="price"
-              placeholder="Price"
-              value={formData.price}
-              onChange={handleChange}
-              className="border p-4 rounded-2xl"
-            />
-
-            <input
-              type="number"
-              name="stock"
-              placeholder="Stock"
-              value={formData.stock}
-              onChange={handleChange}
-              className="border p-4 rounded-2xl"
-            />
-
-            <input
-              type="text"
-              name="category"
-              placeholder="Category"
-              value={formData.category}
-              onChange={handleChange}
-              className="border p-4 rounded-2xl"
-            />
-
-          </div>
-
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={formData.description}
+          <input
+            type="text"
+            name="name"
+            placeholder="Product Name"
+            value={formData.name}
             onChange={handleChange}
             className="
               border
-              p-4
-              rounded-2xl
-              w-full
-              mt-6
+              rounded-xl
+              px-4
+              py-3
+            "
+          />
+
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            value={formData.price}
+            onChange={handleChange}
+            className="
+              border
+              rounded-xl
+              px-4
+              py-3
+            "
+          />
+
+          <input
+            type="number"
+            name="stock"
+            placeholder="Stock"
+            value={formData.stock}
+            onChange={handleChange}
+            className="
+              border
+              rounded-xl
+              px-4
+              py-3
             "
           />
 
@@ -542,74 +579,47 @@ function AdminDashboard() {
             onChange={handleChange}
             className="
               border
-              p-4
-              rounded-2xl
-              w-full
-              mt-6
+              rounded-xl
+              px-4
+              py-3
             "
           />
 
-          <div className="flex items-center gap-3 mt-6">
-
-  <input
-    type="checkbox"
-    name="isOffer"
-    checked={formData.isOffer}
-    onChange={(e) =>
-      setFormData({
-        ...formData,
-        isOffer: e.target.checked
-      })
-    }
-    className="w-5 h-5"
-  />
-
-  <label className="font-semibold">
-    Add to Offers
-  </label>
-
-</div>
-
-          {/* IMAGE PREVIEW */}
-
-          {formData.image && (
-
-            <img
-              src={formData.image}
-              alt="Preview"
-              className="
-                mt-6
-                w-40
-                h-40
-                rounded-2xl
-                object-cover
-              "
-            />
-
-          )}
+          <textarea
+            rows="4"
+            name="description"
+            placeholder="Description"
+            value={formData.description}
+            onChange={handleChange}
+            className="
+              border
+              rounded-xl
+              px-4
+              py-3
+              resize-none
+            "
+          />
 
           <button
+            type="submit"
             className="
-              mt-8
-              bg-green-600
-              hover:bg-green-500
+              bg-green-500
+              hover:bg-green-600
               transition
               text-white
-              px-10
-              py-4
-              rounded-2xl
-              font-bold
+              py-3
+              rounded-xl
+              font-semibold
             "
           >
             {
               editId
                 ? "Update Product"
-                : "Create Product"
+                : "Add Product"
             }
           </button>
 
         </motion.form>
-
 
         {/* PRODUCTS */}
 
@@ -642,7 +652,10 @@ function AdminDashboard() {
             >
 
               <img
-                src={product.image}
+                src={
+                  product.image ||
+                  "https://via.placeholder.com/400"
+                }
                 alt={product.name}
                 className="
                   w-full
@@ -694,13 +707,8 @@ function AdminDashboard() {
                       text-white
                       py-3
                       rounded-2xl
-                      flex
-                      items-center
-                      justify-center
-                      gap-2
                     "
                   >
-                    <FaEdit />
                     Edit
                   </button>
 
@@ -716,13 +724,8 @@ function AdminDashboard() {
                       text-white
                       py-3
                       rounded-2xl
-                      flex
-                      items-center
-                      justify-center
-                      gap-2
                     "
                   >
-                    <FaTrash />
                     Delete
                   </button>
 
@@ -733,6 +736,117 @@ function AdminDashboard() {
             </motion.div>
 
           ))}
+
+        </div>
+
+        {/* CUSTOMER MESSAGES */}
+
+        <div className="mt-20">
+
+          <h2
+            className="
+              text-3xl
+              font-black
+              mb-8
+            "
+          >
+            Customer Messages
+          </h2>
+
+          <div className="grid gap-6">
+
+            {
+              messages.length === 0
+                ? (
+
+                  <div
+                    className="
+                      bg-white
+                      rounded-2xl
+                      p-8
+                      shadow-lg
+                      text-gray-500
+                    "
+                  >
+                    No messages yet.
+                  </div>
+
+                ) : (
+
+                  messages.map((msg) => (
+
+                    <div
+                      key={msg.id}
+                      className="
+                        bg-white
+                        p-6
+                        rounded-3xl
+                        shadow-lg
+                        border
+                        border-zinc-200
+                      "
+                    >
+
+                      <div className="flex justify-between">
+
+                        <div>
+
+                          <h3
+                            className="
+                              text-xl
+                              font-bold
+                            "
+                          >
+                            {msg.name}
+                          </h3>
+
+                          <p className="text-gray-500">
+                            {msg.email}
+                          </p>
+
+                        </div>
+
+                        <button
+                          onClick={() =>
+                            deleteMessage(msg.id)
+                          }
+                          className="
+                            text-red-500
+                            hover:text-red-700
+                            transition
+                          "
+                        >
+                          <FaTrash />
+                        </button>
+
+                      </div>
+
+                      <h4
+                        className="
+                          mt-4
+                          font-semibold
+                        "
+                      >
+                        {msg.subject}
+                      </h4>
+
+                      <p
+                        className="
+                          mt-3
+                          text-gray-700
+                          leading-relaxed
+                        "
+                      >
+                        {msg.message}
+                      </p>
+
+                    </div>
+
+                  ))
+                )
+            }
+
+          </div>
 
         </div>
 

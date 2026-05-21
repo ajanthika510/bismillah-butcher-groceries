@@ -1,23 +1,37 @@
 import {
   createContext,
-  useState,
+  useContext,
   useEffect,
-  useContext
+  useState
 } from "react";
-
-import { toast } from "react-toastify";
 
 export const CartContext = createContext();
 
+export const useCart = () => {
+  return useContext(CartContext);
+};
+
 function CartProvider({ children }) {
 
-  const [cartItems, setCartItems] = useState(
+  /* =========================
+     LOAD CART FROM LOCALSTORAGE
+  ========================== */
 
-    JSON.parse(
-      localStorage.getItem("cartItems")
-    ) || []
+  const [cartItems, setCartItems] = useState(() => {
 
-  );
+    const savedCart =
+      localStorage.getItem("cartItems");
+
+    return savedCart
+      ? JSON.parse(savedCart)
+      : [];
+
+  });
+
+
+  /* =========================
+     SAVE CART TO LOCALSTORAGE
+  ========================== */
 
   useEffect(() => {
 
@@ -29,6 +43,10 @@ function CartProvider({ children }) {
   }, [cartItems]);
 
 
+  /* =========================
+     ADD TO CART
+  ========================== */
+
   const addToCart = (product) => {
 
     const existingItem = cartItems.find(
@@ -37,17 +55,20 @@ function CartProvider({ children }) {
 
     if (existingItem) {
 
-      const updatedCart = cartItems.map((item) =>
+      setCartItems(
 
-        item.id === product.id
-          ? {
-              ...item,
-              quantity: item.quantity + 1
-            }
-          : item
+        cartItems.map((item) =>
+
+          item.id === product.id
+
+            ? {
+                ...item,
+                quantity: item.quantity + 1
+              }
+
+            : item
+        )
       );
-
-      setCartItems(updatedCart);
 
     } else {
 
@@ -59,53 +80,82 @@ function CartProvider({ children }) {
         }
       ]);
     }
-
-    toast.success("Item added to cart");
   };
 
+
+  /* =========================
+     REMOVE ITEM
+  ========================== */
 
   const removeFromCart = (id) => {
 
-    const updatedCart = cartItems.filter(
-      (item) => item.id !== id
-    );
+    setCartItems(
 
-    setCartItems(updatedCart);
+      cartItems.filter(
+        (item) => item.id !== id
+      )
+    );
   };
 
+
+  /* =========================
+     INCREASE QTY
+  ========================== */
 
   const increaseQty = (id) => {
 
-    const updatedCart = cartItems.map((item) =>
+    setCartItems(
 
-      item.id === id
-        ? {
-            ...item,
-            quantity: item.quantity + 1
-          }
-        : item
+      cartItems.map((item) =>
+
+        item.id === id
+
+          ? {
+              ...item,
+              quantity: item.quantity + 1
+            }
+
+          : item
+      )
     );
-
-    setCartItems(updatedCart);
   };
 
 
+  /* =========================
+     DECREASE QTY
+  ========================== */
+
   const decreaseQty = (id) => {
 
-    const updatedCart = cartItems.map((item) =>
+    setCartItems(
 
-      item.id === id
-        ? {
-            ...item,
-            quantity:
-              item.quantity > 1
-                ? item.quantity - 1
-                : 1
-          }
-        : item
+      cartItems.map((item) =>
+
+        item.id === id
+
+          ? {
+              ...item,
+              quantity:
+                item.quantity > 1
+                  ? item.quantity - 1
+                  : 1
+            }
+
+          : item
+      )
     );
+  };
 
-    setCartItems(updatedCart);
+
+  /* =========================
+     CLEAR CART
+  ========================== */
+
+  const clearCart = () => {
+
+    setCartItems([]);
+
+    localStorage.removeItem("cartItems");
   };
 
 
@@ -117,7 +167,8 @@ function CartProvider({ children }) {
         addToCart,
         removeFromCart,
         increaseQty,
-        decreaseQty
+        decreaseQty,
+        clearCart
       }}
     >
 
@@ -125,15 +176,6 @@ function CartProvider({ children }) {
 
     </CartContext.Provider>
   );
-}
-
-
-/* ADD THIS PART */
-
-export function useCart() {
-
-  return useContext(CartContext);
-
 }
 
 export default CartProvider;

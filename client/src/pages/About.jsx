@@ -1019,7 +1019,7 @@ function About() {
             {/* LEFT */}
       
             <p>
-              © 2026 Halal Butcher & Grocery.
+              © 2026 Bismillah Butcher & Grocery.
               All Rights Reserved.
             </p>
       

@@ -9,14 +9,20 @@ import Offers from "./pages/Offers";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
+import WhatsAppButton from "./components/WhatsAppButton";
 import Cart from "./pages/Cart";
+import CartSidebar from "./components/CartSidebar";
+
 import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
 
     <BrowserRouter>
+
+     <CartSidebar />
+
+      <WhatsAppButton />
 
       <Navbar />
 

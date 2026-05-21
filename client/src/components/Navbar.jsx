@@ -8,9 +8,9 @@ import {
 } from "react-icons/fa";
 
 import {
-  useContext,
   useEffect,
-  useState
+  useState,
+  useContext
 } from "react";
 
 import {
@@ -18,15 +18,15 @@ import {
   AnimatePresence
 } from "framer-motion";
 
-import { CartContext } from "../context/CartContext";
+import { useCart } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 
 import logo from "../assets/logo.png";
 
+
 function Navbar() {
 
-  const { cartItems } =
-    useContext(CartContext);
+  const { cartItems } = useCart();
 
   const { user, logout } =
     useContext(AuthContext);

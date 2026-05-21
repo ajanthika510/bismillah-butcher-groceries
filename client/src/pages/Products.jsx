@@ -624,39 +624,6 @@ function Products() {
                       {product.name}
                     </h3>
 
-                    {/* PORTION */}
-
-                    {product.portion && (
-
-                      <p
-                        className="
-                          mt-3
-                          text-xs
-                          sm:text-sm
-                          font-semibold
-                          text-gray-500
-                        "
-                      >
-                        Portion: {product.portion}
-                      </p>
-
-                    )}
-
-                    {/* PRICE */}
-
-                    <p
-                      className="
-                        mt-5
-                        text-2xl
-                        sm:text-3xl
-                        md:text-4xl
-                        font-black
-                        text-green-500
-                      "
-                    >
-                      £{product.price}
-                    </p>
-
 
                     {/* BUTTONS */}
 
@@ -867,31 +834,7 @@ function Products() {
                 >
                   <FaInstagram />
                 </a>
-      
-      
-                {/* WHATSAPP */}
-      
-                <a
-                  href="https://wa.me/447404943400"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    w-12
-                    h-12
-                    rounded-2xl
-                    bg-zinc-900
-                    hover:bg-green-600
-                    transition
-                    duration-300
-                    flex
-                    items-center
-                    justify-center
-                    text-lg
-                  "
-                >
-                  <FaWhatsapp />
-                </a>
-      
+
               </div>
       
             </div>
@@ -919,7 +862,7 @@ function Products() {
             {/* LEFT */}
       
             <p>
-              © 2026 Halal Butcher & Grocery.
+              © 2026 Bismillah Butcher & Grocery.
               All Rights Reserved.
             </p>
       

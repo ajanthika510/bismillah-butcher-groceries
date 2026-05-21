@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -12,6 +14,44 @@ import {
 
 function Contact() {
 
+  const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  subject: "",
+  message: ""
+});
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    await axios.post(
+      "http://localhost:5000/api/messages",
+      formData
+    );
+
+    toast.success("Message sent successfully!");
+
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: ""
+    });
+
+  } catch (error) {
+
+    toast.error("Failed to send message");
+
+  }
+};
   return (
 
     <div
@@ -572,10 +612,15 @@ function Contact() {
               </p>
 
 
-              <form className="mt-10 space-y-6">
-
+              <form
+                  onSubmit={handleSubmit}
+                  className="mt-10 space-y-6"
+              >
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Your Name"
                   className="
                     w-full
@@ -594,7 +639,10 @@ function Contact() {
                 />
 
                 <input
-                  type="email"
+                  type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Your Email"
                   className="
                     w-full
@@ -614,6 +662,9 @@ function Contact() {
 
                 <input
                   type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="Subject"
                   className="
                     w-full
@@ -633,6 +684,9 @@ function Contact() {
 
                 <textarea
                   rows="6"
+                   name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                   placeholder="Your Message"
                   className="
                     w-full
@@ -947,29 +1001,7 @@ function Contact() {
             <FaInstagram />
           </a>
 
-
-          {/* WHATSAPP */}
-
-          <a
-            href="https://wa.me/447404943400"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              w-12
-              h-12
-              rounded-2xl
-              bg-zinc-900
-              hover:bg-green-600
-              transition
-              duration-300
-              flex
-              items-center
-              justify-center
-              text-lg
-            "
-          >
-            <FaWhatsapp />
-          </a>
+          
 
         </div>
 
@@ -998,7 +1030,7 @@ function Contact() {
       {/* LEFT */}
 
       <p>
-        © 2026 Halal Butcher & Grocery.
+        © 2026 Bismillah Butcher & Grocery.
         All Rights Reserved.
       </p>
 
