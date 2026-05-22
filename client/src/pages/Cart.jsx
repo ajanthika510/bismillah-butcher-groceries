@@ -1,16 +1,14 @@
-import {
-  useContext
-} from "react";
+import {useContext} from "react";
 
-import {
-  CartContext
-} from "../context/CartContext";
+import {CartContext} from "../context/CartContext";
 
 import {
   FaTrash,
   FaMinus,
   FaPlus,
-  FaWhatsapp
+  FaWhatsapp,
+  FaFacebookF,
+  FaInstagram
 } from "react-icons/fa";
 
 function Cart() {
@@ -32,7 +30,7 @@ function Cart() {
   );
 
   // WHATSAPP ORDER
-  const handleProceedOrder = () => {
+const handleProceedOrder = () => {
 
   if (cartItems.length === 0) return;
 
@@ -45,17 +43,10 @@ function Cart() {
 
     message +=
       `${index + 1}. ${item.name}\n` +
-      `Quantity: ${item.quantity}\n` +
-      `Price: Rs. ${item.price}\n` +
-      `Subtotal: Rs. ${
-        item.price * item.quantity
-      }\n\n`;
+      `Quantity: ${item.quantity}\n\n`;
   });
 
-  message +=
-    `Total: Rs. ${total.toFixed(2)}`;
-
-  // ENCODE MESSAGE PROPERLY
+  // ENCODE MESSAGE
   const encodedMessage =
     encodeURIComponent(message);
 
@@ -67,7 +58,7 @@ function Cart() {
     "_blank"
   );
 
-  // CLEAR CART AFTER ORDER
+  // CLEAR CART
   clearCart();
 };
 
@@ -228,18 +219,6 @@ function Cart() {
                     {item.category}
                   </p>
 
-                  <p
-                    className="
-                      text-green-600
-                      font-bold
-                      text-lg
-                      sm:text-xl
-                      mt-3
-                    "
-                  >
-                    Rs. {item.price}
-                  </p>
-
                 </div>
 
               </div>
@@ -379,28 +358,7 @@ function Cart() {
                 items-center
                 mb-6
               "
-            >
-
-              <h2
-                className="
-                  text-lg
-                  sm:text-xl
-                  font-semibold
-                "
-              >
-                Total
-              </h2>
-
-              <h2
-                className="
-                  text-2xl
-                  sm:text-3xl
-                  font-bold
-                  text-green-400
-                "
-              >
-                Rs. {total.toFixed(2)}
-              </h2>
+            >         
 
             </div>
 

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import { motion } from "framer-motion";
 
+import { Link } from "react-router-dom";
+
 import {
   FaBoxOpen,
   FaShoppingCart,
@@ -250,120 +252,130 @@ function AdminDashboard() {
 
       {/* SIDEBAR */}
 
-      <div
-        className={`
-          fixed
-          md:static
-          z-50
-          top-24
-          left-0
-          h-full
-          w-72
-          bg-black
-          text-white
-          p-6
-          transition-all
-          duration-300
+<div
+  className={`
+    fixed
+    md:static
+    z-50
+    top-24
+    left-0
+    h-full
+    w-72
+    bg-black
+    text-white
+    p-6
+    transition-all
+    duration-300
 
-          ${
-            sidebarOpen
-              ? "translate-x-0"
-              : "-translate-x-full md:translate-x-0"
-          }
-        `}
-      >
+    ${
+      sidebarOpen
+        ? "translate-x-0"
+        : "-translate-x-full md:translate-x-0"
+    }
+  `}
+>
 
-        <h1
-          className="
-            text-3xl
-            font-black
-            text-green-400
-          "
-        >
-          Admin Panel
-        </h1>
+  <h1
+    className="
+      text-3xl
+      font-black
+      text-green-400
+    "
+  >
+    Admin Panel
+  </h1>
 
-        <div className="mt-12 space-y-6">
+  <div className="mt-12 space-y-6">
 
-          <div
-            className="
-              flex
-              items-center
-              gap-4
-              text-lg
-            "
-          >
-            <FaBoxOpen />
+    {/* PRODUCTS */}
 
-            Products
-          </div>
+    <Link
+      to="/admin"
+      className="
+        flex
+        items-center
+        gap-4
+        text-lg
+        hover:text-green-400
+        transition
+      "
+    >
+      <FaBoxOpen />
+      Products
+    </Link>
 
-          <div
-            className="
-              flex
-              items-center
-              gap-4
-              text-lg
-            "
-          >
-            <FaShoppingCart />
 
-            Orders
-          </div>
+    {/* MESSAGES */}
 
-        </div>
+    <Link
+      to="/admin/messages"
+      className="
+        flex
+        items-center
+        gap-4
+        text-lg
+        hover:text-green-400
+        transition
+      "
+    >
+      <FaShoppingCart />
+      Messages
+    </Link>
 
-      </div>
+  </div>
 
-      {/* MAIN */}
+</div>
 
-      <div
-        className="
-          flex-1
-          p-4
-          md:p-10
-        "
-      >
 
-        {/* TOP BAR */}
+{/* MAIN */}
 
-        <div
-          className="
-            flex
-            items-center
-            justify-between
-            mb-8
-          "
-        >
+<div
+  className="
+    flex-1
+    p-4
+    md:p-10
+  "
+>
 
-          <button
-            onClick={() =>
-              setSidebarOpen(
-                !sidebarOpen
-              )
-            }
-            className="
-              md:hidden
-              bg-black
-              text-white
-              p-3
-              rounded-xl
-            "
-          >
-            <FaBars />
-          </button>
+  {/* TOP BAR */}
 
-          <h2
-            className="
-              text-2xl
-              md:text-4xl
-              font-black
-            "
-          >
-            Product Dashboard
-          </h2>
+  <div
+    className="
+      flex
+      items-center
+      justify-between
+      mb-8
+    "
+  >
 
-        </div>
+    <button
+      onClick={() =>
+        setSidebarOpen(
+          !sidebarOpen
+        )
+      }
+      className="
+        md:hidden
+        bg-black
+        text-white
+        p-3
+        rounded-xl
+      "
+    >
+      <FaBars />
+    </button>
+
+    <h2
+      className="
+        text-2xl
+        md:text-4xl
+        font-black
+      "
+    >
+      Product Dashboard
+    </h2>
+
+  </div>
 
         {/* STATS */}
 
@@ -736,117 +748,6 @@ function AdminDashboard() {
             </motion.div>
 
           ))}
-
-        </div>
-
-        {/* CUSTOMER MESSAGES */}
-
-        <div className="mt-20">
-
-          <h2
-            className="
-              text-3xl
-              font-black
-              mb-8
-            "
-          >
-            Customer Messages
-          </h2>
-
-          <div className="grid gap-6">
-
-            {
-              messages.length === 0
-                ? (
-
-                  <div
-                    className="
-                      bg-white
-                      rounded-2xl
-                      p-8
-                      shadow-lg
-                      text-gray-500
-                    "
-                  >
-                    No messages yet.
-                  </div>
-
-                ) : (
-
-                  messages.map((msg) => (
-
-                    <div
-                      key={msg.id}
-                      className="
-                        bg-white
-                        p-6
-                        rounded-3xl
-                        shadow-lg
-                        border
-                        border-zinc-200
-                      "
-                    >
-
-                      <div className="flex justify-between">
-
-                        <div>
-
-                          <h3
-                            className="
-                              text-xl
-                              font-bold
-                            "
-                          >
-                            {msg.name}
-                          </h3>
-
-                          <p className="text-gray-500">
-                            {msg.email}
-                          </p>
-
-                        </div>
-
-                        <button
-                          onClick={() =>
-                            deleteMessage(msg.id)
-                          }
-                          className="
-                            text-red-500
-                            hover:text-red-700
-                            transition
-                          "
-                        >
-                          <FaTrash />
-                        </button>
-
-                      </div>
-
-                      <h4
-                        className="
-                          mt-4
-                          font-semibold
-                        "
-                      >
-                        {msg.subject}
-                      </h4>
-
-                      <p
-                        className="
-                          mt-3
-                          text-gray-700
-                          leading-relaxed
-                        "
-                      >
-                        {msg.message}
-                      </p>
-
-                    </div>
-
-                  ))
-                )
-            }
-
-          </div>
 
         </div>
 

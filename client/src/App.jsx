@@ -1,4 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 
@@ -11,16 +15,14 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Cart from "./pages/Cart";
-import CartSidebar from "./components/CartSidebar";
-
+import AdminMessages from "./pages/AdminMessages";
 import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
+
   return (
 
     <BrowserRouter>
-
-     <CartSidebar />
 
       <WhatsAppButton />
 
@@ -28,23 +30,55 @@ function App() {
 
       <Routes>
 
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home />}
+        />
 
-        <Route path="/cart" element={<Cart />} />
-        
-        <Route path="/products" element={<Products />} />
+        <Route
+          path="/cart"
+          element={<Cart />}
+        />
 
-        <Route path="/about" element={<About Us />} />
+        <Route
+          path="/products"
+          element={<Products />}
+        />
 
-        <Route path="/contact" element={<Contact />} />
-        
-        <Route path="/offers" element={<Offers />} />
+        <Route
+          path="/about"
+          element={<About />}
+        />
 
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/contact"
+          element={<Contact />}
+        />
 
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/offers"
+          element={<Offers />}
+        />
 
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/register"
+          element={<Register />}
+        />
+
+        <Route
+          path="/admin"
+          element={<AdminDashboard />}
+        />
+
+        <Route
+          path="/admin/messages"
+          element={<AdminMessages />}
+        />
 
       </Routes>
 

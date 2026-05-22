@@ -831,7 +831,7 @@ function About() {
          FOOTER
       ========================= */}
       
-      <footer
+     <footer
   className="
     bg-black
     text-white

@@ -918,7 +918,7 @@ function Home() {
                 mt-5
               "
             >
-              Fresh • Premium • Halal
+             • Fresh • Premium • Halal
             </h2>
 
             <p
